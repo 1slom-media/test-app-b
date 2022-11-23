@@ -3,7 +3,7 @@ import model from './model.js'
 
 const GET = async (req, res) => {
     try {
-        const result = await model.GET(req.params)
+        const result = await model.GET(req.params,req.query)
         res.send(result)
     } catch (error) {
         console.error(error);

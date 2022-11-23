@@ -4,9 +4,9 @@ import {
   POSTRESULT
 } from "./query.js";
 
-const GET =  async ({resultId=0}) => {
+const GET =  async ({resultId=0},{fullname,u_id,f_id}) => {
   try {
-    const result = await fetchAll(GETRESULT, [resultId])
+    const result = await fetchAll(GETRESULT, [resultId,fullname,u_id,f_id])
     return result?.map(res => {
       res.faculties = res.faculties[0] == null ? [] : res.faculties
       res.users = res.users[0] == null ? [] : res.users

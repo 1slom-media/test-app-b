@@ -6,12 +6,14 @@ export const GETRESULT = `
     from result as r
     left join faculties  as f on f.fac_id = r.fac_id
     left join users  as u on u.user_id = r.user_id
-    where  case
+    where (u.fulname ilike concat('%', $2::varchar, '%')) and
+    case when $3 > 1 then  r.user_id=$3 else true end and
+    case when $4 > 1 then  r.fac_id=$4 else true end and  case
                                     when $1 > 0 then r.res_id = $1
                                     else true
-                                    end
+                                    end 
     group by r.res_id
-    order by r.total_score asc
+    order by r.total_score desc
 `;
 
 export const POSTRESULT=`
